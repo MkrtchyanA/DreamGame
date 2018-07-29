@@ -3,26 +3,26 @@ from src.main.blocks import *
 
 
 def main():
-    pg.init()  # Инициация PyGame, обязательная строчка
-    screen = pg.display.set_mode(DISPLAY)  # Создаем окошко
-    pg.display.set_caption("Super Mario Boy")  # Пишем в шапку
-    bg = Surface((WIN_WIDTH, WIN_HEIGHT))  # Создание видимой поверхности
-    # будем использовать как фон
-    bg.fill(Color(BACKGROUND_COLOR))  # Заливаем поверхность сплошным цветом
+    pg.init()
+    screen = pg.display.set_mode(DISPLAY)
+    pg.display.set_caption("Super Mario Boy")
+    bg = Surface((WIN_WIDTH, WIN_HEIGHT))
 
-    hero = Player(55, 55)  # создаем героя по (x,y) координатам
-    left = right = False  # по умолчанию — стоим
+    bg.fill(Color(BACKGROUND_COLOR))
+
+    hero = Player(55, 55)
+    left = right = False
     up = False
 
-    entities = pg.sprite.Group()  # Все объекты
-    platforms = []  # то, во что мы будем врезаться или опираться
+    entities = pg.sprite.Group()
+    platforms = []
     entities.add(hero)
 
     timer = pg.time.Clock()
-    while 1:  # Основной цикл программы
+    while 1:
         timer.tick(60)
 
-        for e in pg.event.get():  # Обрабатываем события
+        for e in pg.event.get():
             if e.type == QUIT:
                 raise SystemExit("QUIT")
             if e.type == KEYDOWN and e.key == K_LEFT:
@@ -39,23 +39,23 @@ def main():
             if e.type == KEYUP and e.key == K_LEFT:
                 left = False
 
-        screen.blit(bg, (0, 0))  # Каждую итерацию необходимо всё перерисовывать
+        screen.blit(bg, (0, 0))
 
-        x = y = 0  # координаты
-        for row in level:  # вся строка
-            for col in row:  # каждый символ
+        x = y = 0
+        for row in level:
+            for col in row:
                 if col == "-":
                     pf = Platform(x, y)
                     entities.add(pf)
                     platforms.append(pf)
 
-                x += PLATFORM_WIDTH  # блоки платформы ставятся на ширине блоков
-            y += PLATFORM_HEIGHT  # то же самое и с высотой
-            x = 0  # на каждой новой строчке начинаем с нуля
+                x += PLATFORM_WIDTH
+            y += PLATFORM_HEIGHT
+            x = 0
 
         hero.update(left, right, up, platforms)
-        entities.draw(screen)  # отображение всего
-        pg.display.update()  # обновление и вывод всех изменений на экран
+        entities.draw(screen)
+        pg.display.update()
 
 
 if __name__ == "__main__":

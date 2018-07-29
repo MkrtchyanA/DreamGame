@@ -1,9 +1,8 @@
 import pygame as pg
 
-
-WIN_WIDTH = 800  # Ширина создаваемого окна
-WIN_HEIGHT = 640  # Высота
-DISPLAY = (WIN_WIDTH, WIN_HEIGHT)  # Группируем ширину и высоту в одну переменную
+WIN_WIDTH = 800
+WIN_HEIGHT = 640
+DISPLAY = (WIN_WIDTH, WIN_HEIGHT)
 BACKGROUND_COLOR = "#004400"
 
 UP = pg.K_w
@@ -44,5 +43,5 @@ level = [
        "-                       -",
        "-------------------------"]
 
-JUMP_POWER = 10
-GRAVITY = 0.98  # Сила, которая будет тянуть нас вниз
+JUMP_POWER = 20
+GRAVITY = 0.98
